@@ -1,0 +1,67 @@
+@startuml
+
+package "Components" {
+  class Tasks {
+    +params: any
+    +selected: int
+    +open: boolean
+    +loading: boolean
+    +setSelected(selected: int): void
+    +setOpen(open: boolean): void
+    +render(): JSX.Element
+  }
+
+  class Tabs {
+    +tabs: Tab[]
+    +setSelected(selected: int): void
+    +render(): JSX.Element
+  }
+
+  class TaskTitle {
+    +label: string
+    +className: string
+    +render(): JSX.Element
+  }
+
+  class BoardView {
+    +tasks: Task[]
+    +render(): JSX.Element
+  }
+
+  class Table {
+    +tasks: Task[]
+    +render(): JSX.Element
+  }
+
+  class AddTask {
+    +open: boolean
+    +setOpen(open: boolean): void
+    +render(): JSX.Element
+  }
+}
+
+package "Models" {
+  class Task {
+    +title: string
+    +status: string
+    +date: Date
+    +description: string
+  }
+
+  class Tab {
+    +title: string
+    +icon: JSX.Element
+  }
+}
+
+Tasks -> Tabs : "contains"
+Tasks -> TaskTitle : "contains"
+Tasks -> BoardView : "renders"
+Tasks -> Table : "renders"
+Tasks -> AddTask : "contains"
+
+Tabs -> Tab : "uses"
+BoardView -> Task : "uses"
+Table -> Task : "uses"
+
+@enduml

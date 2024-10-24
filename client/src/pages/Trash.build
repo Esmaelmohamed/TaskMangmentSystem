@@ -1,0 +1,55 @@
+@startuml
+
+package "Components" {
+  class Trash {
+    +openDialog: boolean
+    +open: boolean
+    +msg: string | null
+    +type: string
+    +selected: string
+    +deleteAllClick(): void
+    +restoreAllClick(): void
+    +deleteClick(id: string): void
+    +restoreClick(id: string): void
+    +TableHeader(): JSX.Element
+    +TableRow(item: Task): JSX.Element
+    +render(): JSX.Element
+  }
+
+  class TableHeader {
+    +render(): JSX.Element
+  }
+
+  class TableRow {
+    +item: Task
+    +render(): JSX.Element
+  }
+
+  class ConfirmatioDialog {
+    +open: boolean
+    +setOpen(open: boolean): void
+    +msg: string | null
+    +setMsg(msg: string | null): void
+    +type: string
+    +setType(type: string): void
+    +onClick(): void
+  }
+}
+
+package "Models" {
+  class Task {
+    +_id: string
+    +title: string
+    +priority: string
+    +stage: string
+    +date: Date
+  }
+}
+
+Trash -> TableHeader : "contains"
+Trash -> TableRow : "renders"
+Trash -> ConfirmatioDialog : "contains"
+
+TableRow -> Task : "uses"
+
+@enduml

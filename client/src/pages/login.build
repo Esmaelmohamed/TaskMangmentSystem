@@ -1,0 +1,48 @@
+@startuml
+
+class Login {
+    - user: Object
+    - register: Function
+    - handleSubmit: Function
+    - errors: Object
+    + render()
+    + submitHandler(data: Object)
+}
+
+class Textbox {
+    - placeholder: String
+    - type: String
+    - name: String
+    - label: String
+    - className: String
+    + render()
+}
+
+class Button {
+    - type: String
+    - label: String
+    - className: String
+    + render()
+}
+
+class useSelector {
+    + getState(): Object
+}
+
+class useForm {
+    + register(name: String, options: Object): Function
+    + handleSubmit(callback: Function): Function
+    + getErrors(): Object
+}
+
+class useNavigate {
+    + navigate(path: String): void
+}
+
+Login --> useSelector : uses
+Login --> useForm : uses
+Login --> useNavigate : uses
+Login --> Textbox : contains
+Login --> Button : contains
+
+@enduml

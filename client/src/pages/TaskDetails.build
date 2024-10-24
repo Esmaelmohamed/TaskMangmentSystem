@@ -1,0 +1,66 @@
+@startuml
+
+package "Components" {
+  class TaskDetails {
+    +task: Task
+    +selected: int
+    +setSelected(selected: int): void
+    +render(): JSX.Element
+  }
+
+  class Activities {
+    +activity: Activity[]
+    +id: string
+    +selected: string
+    +text: string
+    +handleSubmit(): Promise<void>
+    +render(): JSX.Element
+  }
+
+  class Card {
+    +item: Activity
+    +render(): JSX.Element
+  }
+}
+
+package "Models" {
+  class Task {
+    +title: string
+    +priority: string
+    +stage: string
+    +date: Date
+    +assets: string[]
+    +subTasks: SubTask[]
+    +team: TeamMember[]
+    +activities: Activity[]
+  }
+
+  class SubTask {
+    +title: string
+    +date: Date
+    +tag: string
+  }
+
+  class TeamMember {
+    +name: string
+    +title: string
+  }
+
+  class Activity {
+    +by: TeamMember
+    +date: Date
+    +type: string
+    +activity: string
+  }
+}
+
+TaskDetails -> Task : "uses"
+TaskDetails -> Activities : "contains"
+Activities -> Activity : "uses"
+Activities -> Card : "contains"
+Card -> Activity : "displays"
+Task --> SubTask : "has"
+Task --> TeamMember : "has"
+Task --> Activity : "has"
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+
+class Dashboard {
+    - totals: Object
+    - stats: Array
+    + render()
+}
+
+class TaskTable {
+    - tasks: Array
+    + render()
+    - TableHeader
+    - TableRow
+}
+
+class UserTable {
+    - users: Array
+    + render()
+    - TableHeader
+    - TableRow
+}
+
+class TableRow {
+    - task: Object
+    + render()
+}
+
+class UserTableRow {
+    - user: Object
+    + render()
+}
+
+class Chart {
+    + render()
+}
+
+class UserInfo {
+    - user: Object
+    + render()
+}
+
+Dashboard --> TaskTable : contains
+Dashboard --> UserTable : contains
+TaskTable --> TableRow : contains
+UserTable --> UserTableRow : contains
+TableRow --> Chart : uses
+UserTableRow --> UserInfo : uses
+
+@enduml
